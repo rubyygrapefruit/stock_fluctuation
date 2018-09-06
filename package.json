@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/canderson22/stock_fluctuation.git"
+    "url": "git+https://github.com/RobinHackers/stock_fluctuation.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/canderson22/stock_fluctuation/issues"
+    "url": "https://github.com/RobinHackers/stock_fluctuation/issues"
   },
-  "homepage": "https://github.com/canderson22/stock_fluctuation#readme",
+  "homepage": "https://github.com/RobinHackers/stock_fluctuation/blob/master/README.md",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
@@ -33,9 +33,9 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "morgan": "^1.9.0",
-    "webpack-dev-server": "^3.1.7",
-        "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7"
   }
 }

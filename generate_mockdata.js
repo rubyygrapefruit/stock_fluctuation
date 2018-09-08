@@ -55,12 +55,12 @@ function getMonthlyWeekday(n, d, m, y) {
 function timesAndPrice() {
   var x = 10;
   var times = [];
-  var tt = 540;
+  var startingTime = 540;
   var ap = ["am", "pm"];
 
-  for (var i = 0; tt < 18.05 * 60; i++) {
-    var hh = Math.floor(tt / 60);
-    var mm = tt % 60;
+  for (var i = 0; startingTime < 18.05 * 60; i++) {
+    var hh = Math.floor(startingTime / 60);
+    var mm = startingTime % 60;
     var tempObj = {};
 
     tempObj["currentTime"] =
@@ -70,7 +70,7 @@ function timesAndPrice() {
       ap[Math.floor(hh / 12)];
     tempObj["currentPrice"] = faker.commerce.price();
     times.push(tempObj);
-    tt = tt + x;
+    startingTime = startingTime + x;
   }
   return times;
 }

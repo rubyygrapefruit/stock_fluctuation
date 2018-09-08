@@ -15,17 +15,13 @@ var data = function(numOfCompanies) {
       var wednesday = getMonthlyWeekday(j, "Wednesday", "September", 2018);
       var thursday = getMonthlyWeekday(j, "Thursday", "September", 2018);
       var friday = getMonthlyWeekday(j, "Friday", "September", 2018);
-      var weekticker = {
-        [j]: [
-          { date: new Date(2018, 8, monday), price: timesAndPrice() },
-          { date: new Date(2018, 8, tuesday), price: timesAndPrice() },
-          { date: new Date(2018, 8, wednesday), price: timesAndPrice() },
-          { date: new Date(2018, 8, thursday), price: timesAndPrice() },
-          { date: new Date(2018, 8, friday), price: timesAndPrice() }
-        ]
-      };
-      obj.tickers.push(weekticker);
-      // console.log(weekticker);
+      obj.tickers.push(
+        { date: new Date(2018, 8, monday), price: timesAndPrice() },
+        { date: new Date(2018, 8, tuesday), price: timesAndPrice() },
+        { date: new Date(2018, 8, wednesday), price: timesAndPrice() },
+        { date: new Date(2018, 8, thursday), price: timesAndPrice() },
+        { date: new Date(2018, 8, friday), price: timesAndPrice() }
+      );
     }
     results.push(obj);
   }
@@ -79,8 +75,11 @@ function timesAndPrice() {
   return times;
 }
 
-var output = data(1);
-fs.writeFile(path.join(__dirname, "data.json"), JSON.stringify(output), err => {
-  if (err) return console.log(err);
-});
-console.log(output);
+var output = data(99);
+fs.writeFile(
+  path.join(__dirname, "seeds", "companies.json"),
+  JSON.stringify(output),
+  err => {
+    if (err) return console.log(err);
+  }
+);

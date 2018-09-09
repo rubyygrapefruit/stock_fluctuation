@@ -12,6 +12,8 @@ const TickerSchema = new mongoose.Schema({
 
 const CompanySchema = new mongoose.Schema({
   company: { type: String, unique: true },
+  anaylst_percent: Number,
+  robinhood_owners: Number,
   tickers: [TickerSchema]
 });
 

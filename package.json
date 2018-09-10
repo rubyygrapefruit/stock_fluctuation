@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "test": "jest test",
-    "coverage": "jest --collectCoverageFrom=test/**.js --collectCoverageFrom=!src/index.js --coverage test",
     "start": "nodemon server/server.js",
     "build": "webpack --watch --mode production"
   },

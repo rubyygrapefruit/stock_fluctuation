@@ -7,6 +7,8 @@ var data = function(numOfCompanies) {
   for (var i = 0; i < numOfCompanies; i++) {
     var obj = {
       company: faker.company.companyName(),
+      anaylst_percent: faker.random.number({ min: 1, max: 99 }),
+      robinhood_owners: faker.random.number({ min: 20000, max: 200000 }),
       tickers: []
     };
     for (var j = 1; j < 5; j++) {

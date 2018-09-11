@@ -1,0 +1,14 @@
+.top-badges {
+  padding: 13px;
+  text-transform: none;
+  background: var(--primary-bglight);
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  line-height: 19px;
+}
+
+.top-badges:hover {
+  background: var(--primary-bg);
+}

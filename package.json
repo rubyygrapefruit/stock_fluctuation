@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest test",
     "start": "nodemon server/server.js",
-    "build": "webpack --watch --mode production"
+    "build": "webpack --watch --mode production",
+    "lint": "eslint client/**",
+    "coverage": "jest --collectCoverageFrom=client/**.js,test --coverage client, test"
   },
   "repository": {
     "type": "git",
@@ -40,8 +42,10 @@
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "faker": "^4.1.0",

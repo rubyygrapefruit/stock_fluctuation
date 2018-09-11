@@ -1,10 +1,6 @@
 const request = require('supertest');
 const app = require('../server/app.js').app;
-// const mongoose = require("../server/app.js").mongoose;
-
-beforeAll(() => {
-  mongoose.connect();
-});
+const mongoose = require('../server/app.js').mongoose;
 
 afterAll(() => {
   mongoose.connection.close();

@@ -27,9 +27,8 @@ describe('Test restful api', () => {
     async () => {
       await request(app)
         .get('/api')
-        .then(res => res.body)
-        .then(data => {
-          expect(data.length).toBe(4);
+        .then(res => {
+          expect(res.body.length).toBe(4);
         });
     },
     10000

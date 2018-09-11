@@ -7,7 +7,7 @@ const logger = require('morgan');
 const routes = require('../routes');
 
 mongoose.connect(
-  process.env.MONGODB_URI,
+  process.env.MONGODB_URI || 'mongodb://localhost/stocks',
   { useNewUrlParser: true },
   err => {
     console.log(err || `MongoDB connected`);

@@ -9,8 +9,10 @@ import Header from './components/header/Header.jsx';
 const App = () => (
   <div className="uk-container">
     <Header />
-    <h1 className="uk-heading-primary">hello world!</h1>
+    <div>graph header</div>
+    <div>graph</div>
+    <div>time tabs</div>
   </div>
 );
 
-ReactDOM.render(<App />, document.getElementById('app'));
+export default App;

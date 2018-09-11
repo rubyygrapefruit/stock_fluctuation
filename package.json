@@ -3,14 +3,8 @@
   "version": "1.0.0",
   "description": "Stock fluctuation component for robin-hackers app",
   "jest": {
-    "roots": [
-      "<rootDir>"
-    ],
-    "modulePaths": [
-      "<rootDir>"
-    ],
     "setupFiles": [
-      "./client/jestsetup.js"
+      "<rootDir>/client/jestsetup.js"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

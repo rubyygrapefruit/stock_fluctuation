@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "Stock fluctuation component for robin-hackers app",
   "jest": {
+    "roots": [
+      "<rootDir>"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "setupFiles": [
       "./client/jestsetup.js"
     ],
@@ -15,7 +21,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "test": "jest test",
+    "test": "jest",
     "start": "nodemon server/server.js",
     "build": "webpack --watch --mode production",
     "lint": "eslint client/**",

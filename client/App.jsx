@@ -5,11 +5,12 @@ import './App.css';
 
 //Components
 import Header from './components/header/Header.jsx';
+import GraphHeaderContainer from './components/graphHeader/GraphHeaderContainer.jsx';
 
 const App = () => (
-  <div className="uk-container">
+  <div className="uk-container uk-container-small">
     <Header />
-    <div>graph header</div>
+    <GraphHeaderContainer />
     <div>graph</div>
     <div>time tabs</div>
   </div>

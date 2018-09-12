@@ -1,13 +1,13 @@
-# Project Name
+# Stock Fluctuation
 
-> Project description
+> A stock fluctuation app representing the changes of a company's stock prices over time
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+- https://github.com/RobinHackers/stock_fluctuation
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 
 ## Usage
 
-> Some usage instructions
+> Hover over graph and see the prices reflect the stock prices at that time.
 
 ## Requirements
 
@@ -36,4 +36,3 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
-

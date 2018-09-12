@@ -18,6 +18,7 @@
     "test": "jest",
     "start": "nodemon server/server.js",
     "build": "webpack --mode production",
+    "watch": "webpack --watch --mode production",
     "lint": "eslint client/**",
     "coverage": "jest --collectCoverageFrom=client/**.js,test --coverage client, test"
   },

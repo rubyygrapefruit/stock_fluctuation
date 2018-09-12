@@ -2,12 +2,10 @@
 
 exports[`App should render a <div /> 1`] = `
 <div
-  className="uk-container"
+  className="uk-container uk-container-small"
 >
   <Header />
-  <div>
-    graph header
-  </div>
+  <GraphHeaderContainer />
   <div>
     graph
   </div>

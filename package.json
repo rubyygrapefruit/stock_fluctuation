@@ -4,7 +4,7 @@
   "description": "Stock fluctuation component for robin-hackers app",
   "jest": {
     "setupFiles": [
-      "<rootDir>/client/jestsetup.js"
+      "<rootDir>/jestsetup.js"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

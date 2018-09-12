@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    'airbnb-base',
-    'plugin:jest/recommended',
-    'plugin:react/recommended'
-  ],
+  extends: ['airbnb', 'plugin:jest/recommended', 'plugin:react/recommended'],
   plugins: ['import', 'jest', 'react'],
   env: {
     node: true,

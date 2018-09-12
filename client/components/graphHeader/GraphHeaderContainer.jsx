@@ -15,8 +15,8 @@ const GraphHeaderContainer = props => {
       </div>
       <div>
         <ul>
-          <Tabs icon="user" />
-          <Tabs icon="tag" />
+          <Tabs icon="user" display="19,345" />
+          <Tabs icon="tag" display="67%" />
         </ul>
       </div>
     </div>

@@ -11,10 +11,11 @@ const GraphHeaderContainer = props => {
     <div className="uk-column-1-2">
       <div>
         <h1 className="uk-heading-primary">
-          h{props.company_name}
+          Apple
+          {props.company_name}
           <br />
           <span className="money-title">
-            $<CountUp decimals="2" start={20.0} end={1.2} duration={20} />
+            $<CountUp decimals="2" start={200.0} end={220.12} duration={20} />
           </span>
         </h1>
       </div>
@@ -23,12 +24,12 @@ const GraphHeaderContainer = props => {
           <Tabs
             icon="user"
             display="19,345"
-            tooltip="19,345 of people on Robinhood own h stock"
+            tooltip="19,345 of people on Robinhood own Apple stock"
           />
           <Tabs
             icon="tag"
             display="67%"
-            tooltip="67% of anaylst agree h is a buy."
+            tooltip="67% of anaylst agree Apple is a buy."
           />
         </ul>
       </div>

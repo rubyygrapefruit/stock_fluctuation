@@ -1,0 +1,7 @@
+.point {
+  visibility: hidden;
+}
+.point:hover {
+  visibility: visible;
+  fill: #21ce99;
+}

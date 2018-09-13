@@ -4,12 +4,24 @@
   background: var(--lightbg);
   font-size: 13px;
   font-weight: 500;
+  color: #000;
   letter-spacing: 0.25px;
   line-height: 19px;
 }
+
+.bottom-badges:hover {
+  background: #000;
+}
+
 i {
   margin-right: 5px;
 }
+
 a:hover {
   text-decoration: none;
+}
+
+.tooltip {
+  font-size: 12px;
+  max-width: 120px;
 }

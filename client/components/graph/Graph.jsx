@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './Graph.css';
-import { XYPlot, LineSeries, MarkSeries } from 'react-vis';
+import { XYPlot, LineSeries } from 'react-vis';
 import '../../../node_modules/react-vis/dist/style.css';
-// import LineChart from 'react-linechart';
-// import '../../../node_modules/react-linechart/dist/styles.css';
 
 class Graph extends Component {
   constructor() {
@@ -31,32 +29,15 @@ class Graph extends Component {
     }, 2000);
   }
   render() {
-    console.log(this.state.data.length);
     return (
       <div className="uk-container-large">
         Graph
-        <XYPlot
-          onMouseLeave={() =>
-            this.setState({
-              highlightedSeries: null,
-              pointUsed: null
-            })
-          }
-          height={196}
-          width={675}
-          stroke="#21ce99"
-        >
+        <XYPlot height={196} width={675} stroke="#21ce99">
           <LineSeries
             data={this.state.data}
             onNearestX={(datapoint, event) => {
               console.log(datapoint, 'datapoint');
             }}
-          />
-          <MarkSeries
-            data={this.state.data}
-            color="#21ce99"
-            size={5}
-            onNearestXY={({ index }) => this.setState({ index })}
           />
         </XYPlot>
       </div>

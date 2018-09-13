@@ -20,7 +20,7 @@
     "build": "webpack --mode production",
     "watch": "webpack --watch --mode production",
     "lint": "eslint client/**",
-    "coverage": "jest --collectCoverageFrom=client/**.js,test --coverage client, test"
+    "coverage": "jest --collectCoverageFrom=test/**.js --coverage test"
   },
   "repository": {
     "type": "git",

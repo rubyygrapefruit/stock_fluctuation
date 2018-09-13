@@ -7,8 +7,6 @@ exports[`App should render a <div /> 1`] = `
   <Header />
   <GraphHeaderContainer />
   <Graph />
-  <div>
-    time tabs
-  </div>
+  <Footer />
 </div>
 `;

@@ -36,7 +36,7 @@ class Graph extends Component {
           <LineSeries
             data={this.state.data}
             onNearestX={(datapoint, event) => {
-              console.log(datapoint, 'datapoint');
+              // console.log(datapoint, 'datapoint');
             }}
           />
         </XYPlot>

@@ -7,7 +7,6 @@ import './GraphHeader.css';
 import Tabs from './Tab.jsx';
 
 const GraphHeaderContainer = props => {
-  console.log(props);
   return (
     <div className="uk-column-1-2">
       {props.company_name ? (

@@ -25,6 +25,7 @@ export default class App extends Component {
     };
 
     this.allTicks = this.allTicks.bind(this);
+    this.updatePrice = this.updatePrice.bind(this);
   }
 
   componentDidMount() {
@@ -58,9 +59,14 @@ export default class App extends Component {
     this.setState({ allTicks, todayTicks, currentPrice, lastPrice });
   }
 
+  updatePrice(lastPrice, currentPrice) {
+    console.log(lastPrice, currentPrice);
+  }
+
   render() {
     const { anaylst_percent, robinhood_owners, company } = this.state.company;
     const { currentPrice, todayTicks, allTicks, lastPrice } = this.state;
+    // console.log(this.state);
     return (
       <div className="uk-container-small">
         <Header />
@@ -71,7 +77,11 @@ export default class App extends Component {
           currentPrice={currentPrice}
           lastPrice={lastPrice}
         />
-        <Graph />
+        <Graph
+          allTicks={allTicks}
+          todayTicks={todayTicks}
+          onUpdatePrice={this.updatePrice}
+        />
         <Footer />
       </div>
     );

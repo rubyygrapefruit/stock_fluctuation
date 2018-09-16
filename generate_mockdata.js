@@ -1,6 +1,6 @@
-const faker = require("faker");
-const fs = require("fs");
-const path = require("path");
+const faker = require('faker');
+const fs = require('fs');
+const path = require('path');
 
 var data = function(numOfCompanies) {
   var results = [];
@@ -12,11 +12,11 @@ var data = function(numOfCompanies) {
       tickers: []
     };
     for (var j = 1; j < 5; j++) {
-      var monday = getMonthlyWeekday(j, "Monday", "September", 2018);
-      var tuesday = getMonthlyWeekday(j, "Tuesday", "September", 2018);
-      var wednesday = getMonthlyWeekday(j, "Wednesday", "September", 2018);
-      var thursday = getMonthlyWeekday(j, "Thursday", "September", 2018);
-      var friday = getMonthlyWeekday(j, "Friday", "September", 2018);
+      var monday = getMonthlyWeekday(j, 'Monday', 'September', 2018);
+      var tuesday = getMonthlyWeekday(j, 'Tuesday', 'September', 2018);
+      var wednesday = getMonthlyWeekday(j, 'Wednesday', 'September', 2018);
+      var thursday = getMonthlyWeekday(j, 'Thursday', 'September', 2018);
+      var friday = getMonthlyWeekday(j, 'Friday', 'September', 2018);
       obj.tickers.push(
         { date: new Date(2018, 8, monday), price: timesAndPrice() },
         { date: new Date(2018, 8, tuesday), price: timesAndPrice() },
@@ -35,15 +35,15 @@ function getMonthlyWeekday(n, d, m, y) {
     curDay = 0,
     i = 1,
     seekDay;
-  if (d == "Sunday") seekDay = 0;
-  if (d == "Monday") seekDay = 1;
-  if (d == "Tuesday") seekDay = 2;
-  if (d == "Wednesday") seekDay = 3;
-  if (d == "Thursday") seekDay = 4;
-  if (d == "Friday") seekDay = 5;
-  if (d == "Saturday") seekDay = 6;
+  if (d == 'Sunday') seekDay = 0;
+  if (d == 'Monday') seekDay = 1;
+  if (d == 'Tuesday') seekDay = 2;
+  if (d == 'Wednesday') seekDay = 3;
+  if (d == 'Thursday') seekDay = 4;
+  if (d == 'Friday') seekDay = 5;
+  if (d == 'Saturday') seekDay = 6;
   while (curDay < n && i < 31) {
-    targetDay = new Date(i++ + " " + m + " " + y);
+    targetDay = new Date(i++ + ' ' + m + ' ' + y);
     if (targetDay.getDay() == seekDay) curDay++;
   }
   if (curDay == n) {
@@ -58,19 +58,29 @@ function timesAndPrice() {
   var x = 10;
   var times = [];
   var startingTime = 540;
-  var ap = ["am", "pm"];
 
   for (var i = 0; startingTime < 18.05 * 60; i++) {
     var hh = Math.floor(startingTime / 60);
     var mm = startingTime % 60;
     var tempObj = {};
+    var ap = ['am', 'pm'];
+    if (hh === 12) {
+      tempObj['currentTime'] =
+        '12:' + ('0' + mm).slice(-2) + ap[Math.floor(hh / 12)];
+    } else {
+      tempObj['currentTime'] =
+        ('0' + (hh % 12)).slice(-2) +
+        ':' +
+        ('0' + mm).slice(-2) +
+        ap[Math.floor(hh / 12)];
+    }
 
-    tempObj["currentTime"] =
-      ("0" + (hh % 12)).slice(-2) +
-      ":" +
-      ("0" + mm).slice(-2) +
-      ap[Math.floor(hh / 12)];
-    tempObj["currentPrice"] = faker.commerce.price();
+    // tempObj['currentTime'] =
+    //   ('0' + (hh % 12)).slice(-2) +
+    //   ':' +
+    //   ('0' + mm).slice(-2) +
+    //   ap[Math.floor(hh / 12)];
+    tempObj['currentPrice'] = faker.commerce.price(50.0, 200.0, 2);
     times.push(tempObj);
     startingTime = startingTime + x;
   }
@@ -79,7 +89,7 @@ function timesAndPrice() {
 
 var output = data(99);
 fs.writeFile(
-  path.join(__dirname, "seeds", "companies.json"),
+  path.join(__dirname, 'seeds', 'companies.json'),
   JSON.stringify(output),
   err => {
     if (err) return console.log(err);

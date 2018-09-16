@@ -7,7 +7,7 @@ import './GraphHeader.css';
 import Tabs from './Tab.jsx';
 
 const GraphHeaderContainer = props => {
-  // console.log(props);
+  console.log(props);
   return (
     <div className="uk-column-1-2">
       {props.company_name ? (
@@ -20,8 +20,8 @@ const GraphHeaderContainer = props => {
                 $
                 <CountUp
                   decimals="2"
-                  start={200.0}
-                  end={220.12}
+                  start={props.lastPrice}
+                  end={props.currentPrice}
                   duration={20}
                 />
               </span>

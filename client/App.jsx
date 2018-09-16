@@ -1,6 +1,7 @@
 /* global document */
 import React, { Component } from 'react';
 import axios from 'axios';
+import * as moment from 'moment';
 
 //css
 import './App.css';
@@ -17,11 +18,13 @@ export default class App extends Component {
     this.state = {
       companies: [],
       company: {},
+      allTicks: [],
       todayTicks: [],
-      currentPrice: null
+      currentPrice: null,
+      lastPrice: null
     };
 
-    this.todayTicks = this.todayTicks.bind(this);
+    this.allTicks = this.allTicks.bind(this);
   }
 
   componentDidMount() {
@@ -30,33 +33,34 @@ export default class App extends Component {
       .then(res => res.data)
       .then(data => {
         let company = data[0];
-        // this.todayTicks(company.tickers);
+        this.allTicks(company.tickers);
         this.setState({ companies: data, company });
       });
   }
 
-  todayTicks(tickers) {
-    let date = new Date();
-    let today = date.getDate();
-    let time = date.getHours() + ':' + date.getMinutes();
-    let todayTicks = tickers.filter(ticker => {
-      let tickerDate = new Date(ticker.date);
-      if (tickerDate.getDate() === today) {
+  allTicks(tickers) {
+    let allTicks = tickers.filter(ticker => {
+      if (moment(ticker.date).isBefore(moment().add(1, 'days'))) {
         return ticker;
       }
     });
-    console.log(todayTicks);
-    // let currentPrice = todayTicks.price.filter(prices => {
-    //   if (prices.currentPrice.includes(time)) {
-    //     return prices;
-    //   }
-    // });
-    // this.setState({ todayTicks, currentPrice });
+
+    let currentPrice = null;
+
+    let currentTimes = allTicks[allTicks.length - 1].price.map(prices => {
+      if (prices.currentTime <= moment().format('h:mma')) {
+        return prices;
+      }
+    });
+    currentPrice = currentTimes[currentTimes.length - 1].currentPrice;
+    let lastPrice = currentTimes[currentTimes.length - 1].currentPrice;
+    let todayTicks = allTicks[allTicks.length - 1];
+    this.setState({ allTicks, todayTicks, currentPrice, lastPrice });
   }
 
   render() {
-    console.log(this.state);
     const { anaylst_percent, robinhood_owners, company } = this.state.company;
+    const { currentPrice, todayTicks, allTicks, lastPrice } = this.state;
     return (
       <div className="uk-container-small">
         <Header />
@@ -64,6 +68,8 @@ export default class App extends Component {
           percent={anaylst_percent}
           owners={robinhood_owners}
           company_name={company}
+          currentPrice={currentPrice}
+          lastPrice={lastPrice}
         />
         <Graph />
         <Footer />

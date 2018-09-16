@@ -15,17 +15,14 @@ class Graph extends Component {
   }
 
   componentDidUpdate() {
-    // console.log(this.props);
     if (this.state.data.length === 0) {
-      let data = this.props.allTicks.map(tickers => {
-        return tickers.price.map((tick, index) => {
-          return {
-            x: index,
-            y: parseInt(tick.currentPrice)
-          };
-        });
+      let currentTicks = this.props.todayTicks.price.map((tickers, index) => {
+        return {
+          x: index,
+          y: parseInt(tickers.currentPrice)
+        };
       });
-      let currentTicks = data[data.length - 1];
+      let data = this.props.allTicks;
       this.setState({ data, currentTicks });
     }
   }

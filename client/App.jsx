@@ -26,6 +26,7 @@ export default class App extends Component {
 
     this.allTicks = this.allTicks.bind(this);
     this.updatePrice = this.updatePrice.bind(this);
+    this.changeTimeLimit = this.changeTimeLimit.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +60,10 @@ export default class App extends Component {
     this.setState({ allTicks, todayTicks, currentPrice, lastPrice });
   }
 
+  changeTimeLimit(period) {
+    console.log(period);
+  }
+
   updatePrice(lastPrice, currentPrice) {
     console.log(lastPrice, currentPrice);
   }
@@ -82,7 +87,7 @@ export default class App extends Component {
           todayTicks={todayTicks}
           onUpdatePrice={this.updatePrice}
         />
-        <Footer />
+        <Footer changeTime={this.changeTimeLimit} />
       </div>
     );
   }

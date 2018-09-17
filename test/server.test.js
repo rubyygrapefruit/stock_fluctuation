@@ -14,7 +14,6 @@ describe('GET /', () => {
       .end(done);
   });
 });
-
 describe('GET /api', () => {
   test('should get all companies', done => {
     request(app)

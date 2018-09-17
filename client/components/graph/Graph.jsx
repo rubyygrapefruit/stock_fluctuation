@@ -3,40 +3,38 @@ import './Graph.css';
 import { XYPlot, LineSeries } from 'react-vis';
 import * as moment from 'moment';
 import '../../../node_modules/react-vis/dist/style.css';
+import flatten from 'lodash/flatten';
 
 class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
       index: null,
-      data: [],
-      currentTicks: []
+      nextTicks: []
     };
-  }
-
-  componentDidUpdate() {
-    if (this.state.data.length === 0) {
-      let currentTicks = this.props.todayTicks.price.map((tickers, index) => {
-        return {
-          x: index,
-          y: parseInt(tickers.currentPrice)
-        };
-      });
-      let data = this.props.allTicks;
-      this.setState({ data, currentTicks });
-    }
   }
 
   // componentDidMount() {
   //   // console.log(this.state);
   // }
   render() {
-    console.log(this.state);
+    let currentTicks = [{ x: 0, y: 0 }];
+    if (this.props.currentTicks.length) {
+      let ticks = flatten(this.props.currentTicks)[0];
+      // console.log(ticks);
+      currentTicks = ticks.price.map((tickers, index) => {
+        return {
+          x: index,
+          y: parseInt(tickers.currentPrice)
+        };
+      });
+    }
+
     return (
       <div className="uk-container-large">
         <XYPlot height={196} width={675} stroke="#21ce99">
           <LineSeries
-            data={this.state.currentTicks}
+            data={currentTicks}
             onNearestX={(datapoint, event) => {
               // console.log(datapoint, 'datapoint');
             }}

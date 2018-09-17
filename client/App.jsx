@@ -19,7 +19,7 @@ export default class App extends Component {
       companies: [],
       company: {},
       allTicks: [],
-      todayTicks: [],
+      currentTicks: [],
       currentPrice: null,
       lastPrice: null
     };
@@ -56,12 +56,32 @@ export default class App extends Component {
     });
     currentPrice = currentTimes[currentTimes.length - 1].currentPrice;
     let lastPrice = currentTimes[currentTimes.length - 1].currentPrice;
-    let todayTicks = allTicks[allTicks.length - 1];
-    this.setState({ allTicks, todayTicks, currentPrice, lastPrice });
+    let currentTicks = [allTicks[allTicks.length - 1]];
+    this.setState({ allTicks, currentTicks, currentPrice, lastPrice });
   }
 
   changeTimeLimit(period) {
-    console.log(period);
+    // console.log(period);
+    switch (period) {
+      case 'day':
+        this.setState({
+          currentTicks: this.state.allTicks.slice(-1)
+        });
+        break;
+      case 'week':
+        this.setState({
+          currentTicks: this.state.allTicks.slice(-5)
+        });
+        break;
+      case 'month':
+        this.setState({
+          currentTicks: this.state.allTicks
+        });
+        break;
+      default:
+        break;
+    }
+    // console.log(period);
   }
 
   updatePrice(lastPrice, currentPrice) {
@@ -70,8 +90,8 @@ export default class App extends Component {
 
   render() {
     const { anaylst_percent, robinhood_owners, company } = this.state.company;
-    const { currentPrice, todayTicks, allTicks, lastPrice } = this.state;
-    // console.log(this.state);
+    const { currentPrice, currentTicks, allTicks, lastPrice } = this.state;
+    // console.log(currentTicks);
     return (
       <div className="uk-container-small">
         <Header />
@@ -84,7 +104,7 @@ export default class App extends Component {
         />
         <Graph
           allTicks={allTicks}
-          todayTicks={todayTicks}
+          currentTicks={currentTicks}
           onUpdatePrice={this.updatePrice}
         />
         <Footer changeTime={this.changeTimeLimit} />

@@ -1,42 +1,42 @@
 import React, { Component } from 'react';
 import './Graph.css';
 import { XYPlot, LineSeries } from 'react-vis';
+import * as moment from 'moment';
 import '../../../node_modules/react-vis/dist/style.css';
+import flatten from 'lodash/flatten';
 
 class Graph extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       index: null,
-      data: [
-        { x: new Date(2018, 1), y: 8 },
-        { x: new Date(2018, 2), y: 5 },
-        { x: new Date(2018, 3), y: 4 },
-        { x: new Date(2018, 4), y: 9 },
-        { x: new Date(2018, 5), y: 1 },
-        { x: new Date(2018, 6), y: 7 },
-        { x: new Date(2018, 7), y: 6 },
-        { x: new Date(2018, 8), y: 3 },
-        { x: new Date(2018, 9), y: 2 }
-      ]
+      nextTicks: []
     };
   }
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        data: [...this.state.data, { x: new Date(2018, 10), y: 0 }]
-      });
-    }, 2000);
-  }
+
+  // componentDidMount() {
+  //   // console.log(this.state);
+  // }
   render() {
+    let currentTicks = [{ x: 0, y: 0 }];
+    if (this.props.currentTicks.length) {
+      let ticks = flatten(this.props.currentTicks)[0];
+      // console.log(ticks);
+      currentTicks = ticks.price.map((tickers, index) => {
+        return {
+          x: index,
+          y: parseInt(tickers.currentPrice)
+        };
+      });
+    }
+
     return (
       <div className="uk-container-large">
-        Graph
         <XYPlot height={196} width={675} stroke="#21ce99">
           <LineSeries
-            data={this.state.data}
+            data={currentTicks}
             onNearestX={(datapoint, event) => {
-              console.log(datapoint, 'datapoint');
+              // console.log(datapoint, 'datapoint');
             }}
           />
         </XYPlot>

@@ -9,30 +9,42 @@ import Tabs from './Tab.jsx';
 const GraphHeaderContainer = props => {
   return (
     <div className="uk-column-1-2">
-      <div>
-        <h1 className="uk-heading-primary">
-          Apple
-          {props.company_name}
-          <br />
-          <span className="money-title">
-            $<CountUp decimals="2" start={200.0} end={220.12} duration={20} />
-          </span>
-        </h1>
-      </div>
-      <div>
-        <ul>
-          <Tabs
-            icon="user"
-            display="19,345"
-            tooltip="19,345 of people on Robinhood own Apple stock"
-          />
-          <Tabs
-            icon="tag"
-            display="67%"
-            tooltip="67% of anaylst agree Apple is a buy."
-          />
-        </ul>
-      </div>
+      {props.company_name ? (
+        <div>
+          <div>
+            <h1 className="uk-heading-primary">
+              {props.company_name}
+              <br />
+              <span className="money-title">
+                $
+                <CountUp
+                  decimals="2"
+                  start={props.lastPrice}
+                  end={props.currentPrice}
+                  duration={20}
+                />
+              </span>
+            </h1>
+          </div>
+          <div>
+            <ul>
+              <Tabs
+                icon="user"
+                display={props.owners.toLocaleString('en')}
+                tooltip={`${props.owners.toLocaleString('en')} people own ${
+                  props.company_name
+                } on Robinhood.`}
+              />
+              <Tabs
+                icon="tag"
+                display={`${props.percent}%`}
+                tooltip={`${props.percent}% anaylsts agree that 
+                  ${props.company_name} is a buy.`}
+              />
+            </ul>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

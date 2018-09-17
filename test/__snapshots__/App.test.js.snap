@@ -2,11 +2,20 @@
 
 exports[`App should render a <div /> 1`] = `
 <div
-  className="uk-container uk-container-small"
+  className="uk-container-small"
 >
   <Header />
-  <GraphHeaderContainer />
-  <Graph />
-  <Footer />
+  <GraphHeaderContainer
+    currentPrice={null}
+    lastPrice={null}
+  />
+  <Graph
+    allTicks={Array []}
+    currentTicks={Array []}
+    onUpdatePrice={[Function]}
+  />
+  <Footer
+    changeTime={[Function]}
+  />
 </div>
 `;

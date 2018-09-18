@@ -1,21 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App should render a <div /> 1`] = `
-<div
-  className="uk-container-small"
->
-  <Header />
-  <GraphHeaderContainer
-    currentPrice={null}
-    lastPrice={null}
-  />
-  <Graph
-    allTicks={Array []}
-    currentTicks={Array []}
-    onUpdatePrice={[Function]}
-  />
-  <Footer
-    changeTime={[Function]}
-  />
-</div>
-`;
+exports[`App should render a <div /> 1`] = `""`;

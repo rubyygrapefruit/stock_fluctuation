@@ -1,5 +1,4 @@
 import React from 'react';
-import './Footer.css';
 
 class Footer extends React.Component {
   constructor(props) {
@@ -25,19 +24,53 @@ class Footer extends React.Component {
   render() {
     const { day, week, month } = this.state;
     return (
-      <ul className="uk-tab">
-        <li className={day ? 'uk-active' : null}>
-          <a onClick={this.changePeriod.bind(this)} data="day">
+      <ul
+        className={`uk-tab ${
+          !this.props.marketIsOpen ? 'uk-tab-closed' : null
+        } ${this.props.marketIsOpen ? 'theme-open-up' : 'theme-closed-down'}`}
+      >
+        <li
+          className={`${day ? 'uk-active' : null} ${
+            this.props.marketIsUp ? 'market-is-up' : 'market-is-down'
+          }`}
+        >
+          <a
+            className={
+              this.props.marketIsOpen ? 'market-open' : 'market-closed'
+            }
+            onClick={this.changePeriod.bind(this)}
+            data="day"
+          >
             1D
           </a>
         </li>
-        <li className={week ? 'uk-active' : null}>
-          <a onClick={this.changePeriod.bind(this)} data="week">
+        <li
+          className={`${week ? 'uk-active' : null} ${
+            this.props.marketIsUp ? 'market-is-up' : 'market-is-down'
+          }`}
+        >
+          <a
+            className={
+              this.props.marketIsOpen ? 'market-open' : 'market-closed'
+            }
+            onClick={this.changePeriod.bind(this)}
+            data="week"
+          >
             1W
           </a>
         </li>
-        <li className={month ? 'uk-active' : null}>
-          <a onClick={this.changePeriod.bind(this)} data="month">
+        <li
+          className={`${month ? 'uk-active' : null} ${
+            this.props.marketIsUp ? 'market-is-up' : 'market-is-down'
+          }`}
+        >
+          <a
+            className={
+              this.props.marketIsOpen ? 'market-open' : 'market-closed'
+            }
+            onClick={this.changePeriod.bind(this)}
+            data="month"
+          >
             1M
           </a>
         </li>

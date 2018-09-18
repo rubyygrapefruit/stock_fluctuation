@@ -11,11 +11,23 @@ const GraphHeaderContainer = props => {
     <div className="uk-column-1-2">
       {props.company_name ? (
         <div>
-          <div>
-            <h1 className="uk-heading-primary">
+          <div
+            className={
+              props.marketIsOpen ? 'theme-open-up' : 'theme-closed-down'
+            }
+          >
+            <h1
+              className={`uk-heading-primary ${
+                props.marketIsOpen ? 'theme-open-up' : 'theme-closed-down'
+              }`}
+            >
               {props.company_name}
               <br />
-              <span className="money-title">
+              <span
+                className={`money-title ${
+                  props.marketIsOpen ? 'theme-open-up' : 'theme-closed-down'
+                }`}
+              >
                 $
                 <CountUp
                   decimals="2"
@@ -29,6 +41,7 @@ const GraphHeaderContainer = props => {
           <div>
             <ul>
               <Tabs
+                marketIsOpen={props.marketIsOpen}
                 icon="user"
                 display={props.owners.toLocaleString('en')}
                 tooltip={`${props.owners.toLocaleString('en')} people own ${
@@ -36,6 +49,7 @@ const GraphHeaderContainer = props => {
                 } on Robinhood.`}
               />
               <Tabs
+                marketIsOpen={props.marketIsOpen}
                 icon="tag"
                 display={`${props.percent}%`}
                 tooltip={`${props.percent}% anaylsts agree that 

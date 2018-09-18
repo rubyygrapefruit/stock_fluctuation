@@ -74,12 +74,6 @@ function timesAndPrice() {
         ('0' + mm).slice(-2) +
         ap[Math.floor(hh / 12)];
     }
-
-    // tempObj['currentTime'] =
-    //   ('0' + (hh % 12)).slice(-2) +
-    //   ':' +
-    //   ('0' + mm).slice(-2) +
-    //   ap[Math.floor(hh / 12)];
     tempObj['currentPrice'] = faker.commerce.price(50.0, 200.0, 2);
     times.push(tempObj);
     startingTime = startingTime + x;

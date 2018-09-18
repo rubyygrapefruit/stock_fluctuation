@@ -24,7 +24,14 @@ module.exports = {
     // a function will be skipped.
   },
   rules: {
-    'react/jsx-uses-react': 'error',
-    'react/jsx-uses-vars': 'error'
+    'no-console': 0,
+    'import/extensions': ['error', 'never', { jsx: 'always' }],
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['to']
+      }
+    ]
   }
 };

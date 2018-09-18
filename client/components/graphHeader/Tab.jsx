@@ -7,7 +7,11 @@ const Tabs = props => {
   return (
     <li className="uk-align-right">
       <a data-tip={props.tooltip}>
-        <span className="uk-badge bottom-badges">
+        <span
+          className={`uk-badge ${
+            props.marketIsOpen ? 'bottom-badges' : 'market-close'
+          }`}
+        >
           <Icon icon={props.icon} /> {props.display}
         </span>
       </a>

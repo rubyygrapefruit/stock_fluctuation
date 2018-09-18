@@ -32,7 +32,11 @@ class Graph extends Component {
 
     return (
       <div className="uk-container-large">
-        <XYPlot height={196} width={675} stroke="#21ce99">
+        <XYPlot
+          height={196}
+          width={675}
+          stroke={this.props.marketIsUp ? '#21ce99' : '#f45531'}
+        >
           <LineSeries
             data={currentTicks}
             onNearestX={(datapoint, event) => {

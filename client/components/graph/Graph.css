@@ -1,7 +1,18 @@
-.point {
-  visibility: hidden;
+.crosshair {
+  border-style: none;
+  color: #8c8c8e;
 }
-.point:hover {
-  visibility: visible;
-  fill: #21ce99;
+.rv-crosshair__line {
+  color: #8c8c8e !important;
+  background: #8c8c83 !important;
+}
+.rv-crosshair__inner {
+  position: absolute;
+  text-align: left !important;
+  top: -19px !important;
+  right: 0 !important;
+  width: 300px;
+  left: -14px !important;
+  font-size: 13px;
+  margin: auto auto;
 }

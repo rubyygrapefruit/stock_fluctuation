@@ -23,12 +23,15 @@ export default class App extends Component {
       currentTicks: [],
       timeTicks: [],
       nextTicks: [],
-      currentPrice: null,
       startingPrice: null,
-      lastPrice: null,
       marketIsUp: true,
       marketIsOpen: true,
-      showDay: true
+      showDay: true,
+      currentPrice: null,
+      lastPrice: null,
+      newPrice: null,
+      showMonth: false,
+      showWeek: false
     };
 
     this.allTicks = this.allTicks.bind(this);
@@ -37,20 +40,13 @@ export default class App extends Component {
     this.transformDayTicks = this.transformDayTicks.bind(this);
     this.updateTicks = this.updateTicks.bind(this);
     this.checkMarketValue = this.checkMarketValue.bind(this);
-    this.transformTimeTicks = this.transformTimeTicks.bind(this);
+    this.transformWeekTicks = this.transformWeekTicks.bind(this);
+    this.transformMonthTicks = this.transformMonthTicks.bind(this);
+    this.checkTime = this.checkTime.bind(this);
   }
 
   componentDidMount() {
-    // Check time for app theme
-    const time = moment();
-    const beforeTime = moment('09:00', 'hh:mm');
-    const afterTime = moment('15:00', 'hh:mm');
-
-    if (time.isBetween(beforeTime, afterTime)) {
-      this.setState({ marketIsOpen: true });
-    } else {
-      this.setState({ marketIsOpen: false });
-    }
+    setInterval(() => this.checkTime(), 1000);
 
     axios
       .get('/api')
@@ -61,7 +57,18 @@ export default class App extends Component {
         this.setState({ companies: data, company });
       });
   }
+  checkTime() {
+    // Check time for app theme
+    const time = moment();
+    const beforeTime = moment('09:00', 'hh:mm');
+    const afterTime = moment('15:00', 'hh:mm');
 
+    if (time.isBetween(beforeTime, afterTime)) {
+      this.setState({ marketIsOpen: true });
+    } else {
+      this.setState({ marketIsOpen: false });
+    }
+  }
   allTicks(tickers) {
     const allTicks = tickers.filter(ticker => {
       if (moment(ticker.date).isBefore(moment())) {
@@ -84,11 +91,9 @@ export default class App extends Component {
     });
     // starting price starts at today's open market value
     const startingPrice = currentTicks[0].price;
-    console.log(startingPrice);
     // same for last and current when app opens up
     const lastPrice = currentTicks[currentTicks.length - 1].price;
     const currentPrice = currentTicks[currentTicks.length - 1].price;
-    console.log(currentPrice);
     // set intialState when component mounts
     this.setState({
       allTicks,
@@ -124,7 +129,6 @@ export default class App extends Component {
   }
 
   transformDayTicks(tickers) {
-    // console.log('tickers', tickers);
     const array = flatten(
       tickers.map(ticker => {
         const dateStr = ticker.date.slice(0, 10);
@@ -145,7 +149,7 @@ export default class App extends Component {
     return array;
   }
 
-  transformTimeTicks(tickers) {
+  transformWeekTicks(tickers) {
     let count = 0;
     const array = flatten(
       tickers.map(ticker => {
@@ -166,6 +170,23 @@ export default class App extends Component {
     return array;
   }
 
+  transformMonthTicks(tickers) {
+    const array = flatten(
+      tickers.map((ticker, index) => {
+        const dateStr = ticker.date.slice(0, 10);
+        let date = moment(dateStr, 'YYYY-MM-DD');
+        const lastTick = ticker.price[ticker.price.length - 1];
+        return {
+          x: index + 1,
+          y: parseInt(lastTick.currentPrice),
+          dateTime: date,
+          price: lastTick.currentPrice
+        };
+      })
+    );
+    return array;
+  }
+
   checkMarketValue() {
     const { startingPrice, currentPrice } = this.state;
     if (parseInt(startingPrice) >= parseInt(currentPrice)) {
@@ -175,32 +196,46 @@ export default class App extends Component {
     }
   }
   changeTimeLimit(period) {
-    console.log(period);
     switch (period) {
       case 'day':
         this.updateTicks();
-        return this.setState({ showDay: true });
+        return this.setState({
+          showDay: true,
+          showWeek: false,
+          showMonth: false
+        });
       case 'week':
         clearInterval(this.updateTicks);
         return this.setState({
           showDay: false,
-          timeTicks: this.transformTimeTicks(this.state.allTicks.slice(-5))
+          showMonth: false,
+          showWeek: true,
+          timeTicks: this.transformWeekTicks(this.state.allTicks.slice(-5))
         });
       case 'month':
         clearInterval(this.updateTicks);
         this.setState({
           showDay: false,
-          timeTicks: this.transformTimeTicks(this.state.allTicks)
+          showWeek: false,
+          showMonth: true,
+          timeTicks: this.transformMonthTicks(this.state.allTicks)
         });
         break;
       default:
         break;
     }
-    // console.log(period);
   }
 
-  updatePrice(lastPrice, currentPrice) {
-    console.log(lastPrice, currentPrice);
+  updatePrice(newPrice, show) {
+    if (show && newPrice !== this.state.currentPrice) {
+      this.setState({
+        newPrice
+      });
+    } else if (!show) {
+      this.setState({
+        newPrice: null
+      });
+    }
   }
 
   render() {
@@ -213,11 +248,15 @@ export default class App extends Component {
       timeTicks,
       lastPrice,
       marketIsOpen,
-      marketIsUp
+      marketIsUp,
+      newPrice,
+      showWeek,
+      showMonth
     } = this.state;
     let tickers = showDay ? currentTicks : timeTicks;
     return (
       <div
+        id="stockFlucuation"
         className={`uk-container-small ${
           marketIsOpen ? 'theme-open-up' : 'theme-closed-down'
         }`}
@@ -227,7 +266,7 @@ export default class App extends Component {
           percent={anaylst_percent}
           owners={robinhood_owners}
           company_name={company}
-          currentPrice={currentPrice}
+          currentPrice={newPrice ? newPrice : currentPrice}
           lastPrice={lastPrice}
           marketIsOpen={marketIsOpen}
         />
@@ -236,6 +275,9 @@ export default class App extends Component {
           currentTicks={tickers}
           onUpdatePrice={this.updatePrice}
           marketIsUp={marketIsUp}
+          showDay={showDay}
+          showWeek={showWeek}
+          showMonth={showMonth}
         />
         <Footer
           marketIsOpen={marketIsOpen}

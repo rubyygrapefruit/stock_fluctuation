@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Graph.css';
-import { XYPlot, LineSeries } from 'react-vis';
+import { XYPlot, LineSeries, d3Shape } from 'react-vis';
 import * as moment from 'moment';
 import '../../../node_modules/react-vis/dist/style.css';
 import flatten from 'lodash/flatten';
@@ -9,36 +9,23 @@ class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: null,
-      nextTicks: []
+      index: null
     };
   }
 
-  // componentDidMount() {
-  //   // console.log(this.state);
-  // }
   render() {
-    let currentTicks = [{ x: 0, y: 0 }];
-    if (this.props.currentTicks.length) {
-      let ticks = flatten(this.props.currentTicks)[0];
-      // console.log(ticks);
-      currentTicks = ticks.price.map((tickers, index) => {
-        return {
-          x: index,
-          y: parseInt(tickers.currentPrice)
-        };
-      });
-    }
-
+    // const configuredCurve = d3Shape.curve();
     return (
       <div className="uk-container-large">
         <XYPlot
-          height={196}
-          width={675}
+          height={300}
+          width={800}
           stroke={this.props.marketIsUp ? '#21ce99' : '#f45531'}
+          xRange={[0, 2500]}
+          yRange={[10, 180]}
         >
           <LineSeries
-            data={currentTicks}
+            data={this.props.currentTicks}
             onNearestX={(datapoint, event) => {
               // console.log(datapoint, 'datapoint');
             }}

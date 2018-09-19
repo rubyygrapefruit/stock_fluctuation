@@ -33,7 +33,7 @@ const GraphHeaderContainer = props => {
                   decimals="2"
                   start={props.lastPrice}
                   end={props.currentPrice}
-                  duration={20}
+                  duration={2}
                 />
               </span>
             </h1>

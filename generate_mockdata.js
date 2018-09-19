@@ -63,18 +63,14 @@ function timesAndPrice() {
     var hh = Math.floor(startingTime / 60);
     var mm = startingTime % 60;
     var tempObj = {};
-    var ap = ['am', 'pm'];
-    if (hh === 12) {
+    if (hh >= 12) {
       tempObj['currentTime'] =
-        '12:' + ('0' + mm).slice(-2) + ap[Math.floor(hh / 12)];
+        ('0' + ((hh % 12) + 12)).slice(-2) + ':' + ('0' + mm).slice(-2);
     } else {
       tempObj['currentTime'] =
-        ('0' + (hh % 12)).slice(-2) +
-        ':' +
-        ('0' + mm).slice(-2) +
-        ap[Math.floor(hh / 12)];
+        ('0' + (hh % 12)).slice(-2) + ':' + ('0' + mm).slice(-2);
     }
-    tempObj['currentPrice'] = faker.commerce.price(50.0, 200.0, 2);
+    tempObj['currentPrice'] = faker.commerce.price(100.0, 150.7, 2);
     times.push(tempObj);
     startingTime = startingTime + x;
   }
